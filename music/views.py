@@ -14,7 +14,7 @@ def music_list(request):
     if request.method == 'GET':
         songs = Song.objects.all()
         serializer = SongSerializer(songs, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     
 
     elif request.method == 'POST':
@@ -29,7 +29,7 @@ def music_detail(request, pk):
     if request.method == 'GET':
         song = get_object_or_404(Song, pk=pk)
         serializer = SongSerializer(song)
-        return Response(serializer.data, status=status.HTTP_302_FOUND)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     elif request.method == 'PUT':
         song = get_object_or_404(Song, pk=pk)
         serializer = SongSerializer(song, data=request.data)
