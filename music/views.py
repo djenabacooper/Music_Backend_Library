@@ -9,7 +9,7 @@ from .serializers import SongSerializer
 
 
 @api_view(['GET', 'POST'])
-def library_list(request):
+def music_list(request):
 
     if request.method == 'GET':
         songs = Song.objects.all()
@@ -23,20 +23,20 @@ def library_list(request):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
        
-#@api_view(['GET', 'PUT', 'DELETE'])
-#def song_detail(request, pk):
-#    
-#    if request.method == 'Get':
-#        song = get_object_or_404(Product, pk=pk)
-#        serializer = SongSerializer(product);
-#        return Response(serializer.data)
-#    elif request.method == 'PUT':
-#        song = get_object_or_404(Product, pk=pk)
-#        serializer = SongSerializer(song, data=request.data)
-#        serializer.is_valid(raise_exception=True)
-#        serializer.save()
-#        return Response(serializer.data)
-#    elif request.method == 'DELETE':
-#        song = get_object_or_404(Song, pk=pk)
-#        song.delete()
-#        return Response(status=status.HTTP_204_NO_CONTENT)
+@api_view(['GET', 'PUT', 'DELETE'])
+def music_detail(request, pk):
+    
+    if request.method == 'GET':
+        song = get_object_or_404(Song, pk=pk)
+        serializer = SongSerializer(song)
+        return Response(serializer.data, status=status.HTTP_302_FOUND)
+    elif request.method == 'PUT':
+        song = get_object_or_404(Song, pk=pk)
+        serializer = SongSerializer(song, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+    elif request.method == 'DELETE':
+        song = get_object_or_404(Song, pk=pk)
+        song.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
