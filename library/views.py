@@ -17,12 +17,12 @@ def library_list(request):
         return Response(serializer.data)
     
 
-#    elif request.method == 'POST':
-#        serializer = SongSerializer(data=request.data)
-#        serializer.is_valid(raise_exception=True)
-#        serializer.save()
-#        return Response(serializer.data, status=status.HTTP_201_CREATED)
-#       
+    elif request.method == 'POST':
+        serializer = SongSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+       
 #@api_view(['GET', 'PUT', 'DELETE'])
 #def song_detail(request, pk):
 #    
